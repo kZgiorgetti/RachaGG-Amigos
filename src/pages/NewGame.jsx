@@ -5,12 +5,16 @@ import { useState } from "react"
 
 const NewGame = () => {
 
-
-    const {value, setValue} = useState("")
+    const [day, setDay] = useState("")
+    const [time, setTime] = useState("")
+    const [value, setValue] = useState("")
+    const [duration, setDuration] = useState("")
+    const [loc, setLoc] = useState("")
+    const [obs, setObs] = useState("")
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(value)
+        console.log(value, day, duration)
     }
 
   return (
@@ -28,17 +32,19 @@ const NewGame = () => {
                     <input 
                         type="date" 
                         name="day" 
-                        
+                        value={day}
+                        onChange={(e) => setDay(e.target.value)}
                         />
 
                     <input 
                         type="time" 
                         name="Hour" 
+                        value={time}
+                        onChange={(e) => setTime(e.event.target.value)}
                         />
 
                     <input 
                         type="text" 
-                        name="value" 
                         placeholder="Valor" 
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
@@ -47,7 +53,9 @@ const NewGame = () => {
                     <input 
                         type="number" 
                         name="duration" 
-                        placeholder="Duração" 
+                        placeholder="Duração"
+                        value={duration}
+                        onChange={(e) => setDuration(e.event.value)}
                         
                         />
 
@@ -55,6 +63,8 @@ const NewGame = () => {
                         type="text" 
                         name="place" 
                         placeholder="Localização" 
+                        value={loc}
+                        onChange={(e) => setLoc(e.event.value)}
                         
                         
                         />
@@ -62,6 +72,8 @@ const NewGame = () => {
                     <textarea className={style.obs} 
                         name="obs" id="" 
                         placeholder="Observações" 
+                        value={obs}
+                        onChange={(e) => setObs(e.event.value)}
                        
                         ></textarea>
 
