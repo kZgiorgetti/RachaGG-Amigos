@@ -1,20 +1,13 @@
 import style from "./NewGame.module.css"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "@phosphor-icons/react"
-import { useState } from "react"
 
 const NewGame = () => {
 
-    const [day, setDay] = useState("")
-    const [time, setTime] = useState("")
-    const [value, setValue] = useState("")
-    const [duration, setDuration] = useState("")
-    const [loc, setLoc] = useState("")
-    const [obs, setObs] = useState("")
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(value, day, duration)
+        console.log()
     }
 
   return (
@@ -32,49 +25,40 @@ const NewGame = () => {
                     <input 
                         type="date" 
                         name="day" 
-                        value={day}
-                        onChange={(e) => setDay(e.target.value)}
+                        required
                         />
 
                     <input 
                         type="time" 
                         name="Hour" 
-                        value={time}
-                        onChange={(e) => setTime(e.event.target.value)}
+                        required
                         />
 
                     <input 
                         type="text" 
                         placeholder="Valor" 
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
+                        required
                         />
 
                     <input 
                         type="number" 
                         name="duration" 
                         placeholder="Duração"
-                        value={duration}
-                        onChange={(e) => setDuration(e.event.value)}
+                        min={0}
+                        required
                         
                         />
 
                     <input className={style.place} 
                         type="text" 
                         name="place" 
-                        placeholder="Localização" 
-                        value={loc}
-                        onChange={(e) => setLoc(e.event.value)}
-                        
-                        
+                        placeholder="Localização"
+                        required
                         />
 
                     <textarea className={style.obs} 
                         name="obs" id="" 
-                        placeholder="Observações" 
-                        value={obs}
-                        onChange={(e) => setObs(e.event.value)}
-                       
+                        placeholder="Observações"
                         ></textarea>
 
                     <button type="submit">Criar racha</button>

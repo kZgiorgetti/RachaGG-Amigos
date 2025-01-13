@@ -1,23 +1,24 @@
 import style from "./Game.module.css"
-import { ArrowLeft, Trash, PencilLine } from "@phosphor-icons/react"
+import { ArrowLeft, Trash, PencilLine, MinusCircle } from "@phosphor-icons/react"
 import { Link } from "react-router-dom"
-import PlayerList from "../components/Players"
 import { useState } from "react"
 
 const Game = () => {
 
-    const [player, setPlayer] = useState("")
+    const [playersList, setPlayersList] = useState([])
+    const [input, setInput] = useState("")
 
-    const handleSubmit = (event) => {
+    const handleAddPlayer = (event) => {
         event.preventDefault()
-        console.log(player)
+        setPlayersList([...playersList, input])
+        setInput("")
     }
 
-    // const addPlayer = (player) => {
-    //     // id, name, payment
+    const deletePlayer = (id) => {
+        setPlayersList(oldState => oldState.filter((item) => item.id !== id)) 
+        
+      }
 
-    //     setPlayer([...player, {id: Date.now(), text: player, payment: false}])
-    // }
 
   return (
     <div>
@@ -49,18 +50,17 @@ const Game = () => {
         </section>
         <section className={style.detailsBody}>
             <header>
-                <h2><span>14</span> Jogadores</h2>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        placeholder="Digite um nome" 
-                        value={player}
-                        onChange={(e) => setPlayer(e.target.value)}
-                        />
-                    <button type="submit" className={style.addButton}>Adicionar</button>
-            </form>
-            </header>
-            
+                    <h2>{playersList.length} Jogadores</h2>
+                    <form onSubmit={handleAddPlayer}>
+                        <input 
+                            type="text" 
+                            placeholder="Digite um nome" 
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            />
+                        <button type="submit" className={style.addButton}>Adicionar</button>
+                    </form>
+            </header>          
             <div className={style.tableHeader}>
                 <p>Nome</p> 
                 <p>Pagamento</p>
@@ -68,7 +68,19 @@ const Game = () => {
             </div>
             <table className={style.tableList}>
                 <ul>
-                    <PlayerList/>
+                    {/* <Players/> */}
+                    {playersList.map(
+                        (item, id) => (
+                            <li key={item.id}>
+                                {id}
+                                {item} 
+                                <div className={style.paymentInput}>
+                                    <input type="checkbox"/>
+                                </div>
+                                <p onClick={() => deletePlayer(input.id)}>Remover <MinusCircle size={20}/></p>
+                            </li> 
+                       )
+                    )}
                 </ul>
             </table>
         </section>
