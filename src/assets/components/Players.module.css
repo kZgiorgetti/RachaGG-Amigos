@@ -1,0 +1,38 @@
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-top: 1px solid rgba(221, 227, 220, 1);
+    border-bottom: 1px solid rgba(221, 227, 220, 1);
+}
+
+.playerName {
+    font-size: 1rem;
+    color: rgba(36, 38, 34, 1);
+}
+
+.paymentInput {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.paymentInput input {
+    justify-content: center;
+    width: 1rem;
+    cursor: pointer;
+}
+
+/* Estilização botão remover */
+.list p { 
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+    color: rgba(183, 4, 4, 1);
+    cursor: pointer;
+}
