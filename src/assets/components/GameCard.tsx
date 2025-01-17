@@ -4,9 +4,9 @@ import { Link } from "react-router"
 
 
 interface IProps {
-  day: number,
+  day: Date,
   hour: string,
-  value: number,
+  value: string,
   players: number,
   duration: string,
   status: string,

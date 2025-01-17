@@ -19,9 +19,16 @@ interface GameCard {
 const Home = () => {
 
   const navigate = useNavigate();
-  const [gamesList, setGamesList] = useState<[]>(
-    //  JSON.parse(localStorage.getItem("gamesList")) || 
-     [])
+  const [gamesList, setGamesList] = useState<GameCard[]>(
+    JSON.parse(localStorage.getItem("gamesList")!) || []
+);
+
+useEffect(() => {
+    const storedGames = JSON.parse(localStorage.getItem("gamesList")!) || [];
+    setGamesList(storedGames);
+}, []);
+
+     
 
   // useEffect(() => {
   //   localStorage.setItem("gamesList", JSON.stringify(gamesList)); 
@@ -51,19 +58,17 @@ const Home = () => {
       <TopMenu text="Criar racha" addGame={handleAddGame}/>
     
       <div className={style.cards}>
+      {gamesList.map((game) => (
         <GameCard
-        day={20}
-        hour={"20h30"}
-        value={140}
-        players={14}
-        duration={"60 minutos"}
-        status={"Agendado"}
+            key={game.id}
+            day={game.day}
+            hour={game.hour}
+            value={game.value}
+            players={game.players}
+            duration={game.duration}
+            status={game.status}
         />
-        {gamesList.map(
-          (newGame) => (
-            <GameCard key={newGame.id}/>
-          )
-        )}
+    ))}
       </div>
     </div>
   )

@@ -64,7 +64,20 @@ const Game = () => {
 
     useFormPersist("form-name", { watch, setValue });
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<IFormInput> = (data) => {
+        const gameData = {
+            id: uuidv4(),
+            day: data.date,
+            hour: data.hour,
+            value: data.value,
+            players: playersList.length,
+            duration: data.duration,
+            status: data.status,
+        };
+    
+        localStorage.setItem("gamesList", JSON.stringify([...(JSON.parse(localStorage.getItem("gamesList")!) || []), gameData]));
+        navigate("/"); // Redirecionar para a tela Home
+    };
 
     const valor = watch ("value")
     const soma = valor / playersList.length
