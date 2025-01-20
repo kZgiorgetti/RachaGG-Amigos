@@ -9,7 +9,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/detalhes" element={<Game/>}/>
+        <Route path="/detalhes/:id" element={<Game/>}/>
         <Route path="/novoracha" element={<NewGameForm onAddGame={undefined}/>}/>
       </Routes>
     </>

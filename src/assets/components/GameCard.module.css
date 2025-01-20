@@ -1,8 +1,21 @@
 .card {
     width: 21.75rem;
-    margin-top: 2rem;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1rem;
+    align-items: center;
+}
+
+.deleteIcon {
+    color: red;
+    cursor: pointer;
 }
 
 .card h1 {
@@ -19,7 +32,7 @@
     color: rgba(36, 38, 34, 1);
 }
 
-.card div {
+.card .cardDetails {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-left: 0.75rem;
@@ -55,9 +68,4 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.card .status {
-    font-weight: 500;
-    color: rgba(212, 162, 15, 1);
 }

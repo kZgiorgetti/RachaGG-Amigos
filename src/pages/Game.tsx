@@ -155,7 +155,6 @@ const Game = () => {
                             {...register("location")}/>
                         </span></p>
                     <div className={style.buttons}>
-                        <button onSubmit={undefined} className={style.delete}> Cancelar</button>
                         <button type="submit" className={style.edit}>Confirmar</button>
                     </div>
                 </form> 
