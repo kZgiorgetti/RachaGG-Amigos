@@ -2,8 +2,6 @@
     width: 21.75rem;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
-    position: relative;
-    overflow: hidden;
 }
 
 .cardHeader {
@@ -14,7 +12,7 @@
 }
 
 .deleteIcon {
-    color: red;
+    color: rgba(183, 4, 4, 1);
     cursor: pointer;
 }
 
@@ -32,7 +30,7 @@
     color: rgba(36, 38, 34, 1);
 }
 
-.card .cardDetails {
+.cardDetails {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-left: 0.75rem;
@@ -68,4 +66,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.location {
+    grid-column: 1/3;
 }

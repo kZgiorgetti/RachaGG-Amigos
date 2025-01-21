@@ -12,9 +12,7 @@ const TopMenu = ({text, addGame}:IProps) => {
             <img src="../Logo.svg"/>
             <p>Racha GG & Amigos</p>
         <button onClick={addGame}>
-          {/* <Link className={style.buttonCTA} to="/novoracha"> */}
             {text}
-          {/* </Link> */}
         </button>
       </header>
     </div>

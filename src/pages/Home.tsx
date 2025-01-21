@@ -6,12 +6,13 @@ import { useNavigate } from "react-router"
 
 interface GameCard {
     id: string,
-    day: Date,
+    day: string,
     hour: string,
     value: string,
     players: number,
     duration: string,
     status: string,
+    location: string,
 }
 
 const Home = () => {
@@ -19,21 +20,21 @@ const Home = () => {
   const [gamesList, setGamesList] = useState<GameCard[]>(
     JSON.parse(localStorage.getItem("gamesList")!) || []
   );
-
+  
   useEffect(() => {
     const handleStorageChange = () => {
       const storedGames = JSON.parse(localStorage.getItem("gamesList")!) || [];
       setGamesList(storedGames);
     };
-
-    window.addEventListener("storage", handleStorageChange); // Monitore mudanças no localStorage.
-
+  
+    window.addEventListener("storage", handleStorageChange);
+  
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
-  // Função para deletar um jogo da lista
+
   const handleDeleteGame = (id: string) => {
     const updatedGames = gamesList.filter((game) => game.id !== id);
     setGamesList(updatedGames);
@@ -41,13 +42,12 @@ const Home = () => {
   };
 
   const handleAddGame = (event: { preventDefault: () => void }) => {
-      event.preventDefault()
-      const newGame = {id: "unique-id", day: new Date(), hour: "10:00", value: "100", players: 4, duration: "60", status: "Ativo"}; // Exemplo de dados
-      setGamesList([...gamesList, newGame]);
-      setTimeout(() => {
-        navigate('/detalhes');
-      }, 600);
-  }
+    event.preventDefault();
+    setTimeout(() => {
+      navigate('/detalhes');
+    }, 600);
+  };
+
 
   return (
     <div>
@@ -61,8 +61,8 @@ const Home = () => {
             value={game.value}
             players={game.players}
             duration={game.duration}
-            status={game.status}
-            deleteGame={() => handleDeleteGame(game.id)} // Passa a função para deletar o jogo
+            location={game.location}
+            deleteGame={() => handleDeleteGame(game.id)}
           />
         ))}
       </div>
@@ -71,3 +71,4 @@ const Home = () => {
 }
 
 export default Home;
+

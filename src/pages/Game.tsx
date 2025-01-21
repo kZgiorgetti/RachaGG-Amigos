@@ -1,6 +1,6 @@
 import style from "./Game.module.css"
 import { ArrowLeft, MinusCircle } from "@phosphor-icons/react"
-import { Link, useNavigate } from "react-router"
+import { Link, useNavigate, useParams } from "react-router"
 import { useState, useEffect } from "react"
 import TopMenu from "../assets/components/TopMenu"
 import { v4 as uuidv4 } from "uuid"
@@ -24,19 +24,20 @@ interface IFormInput {
 
 const Game = () => {
 
+    const [input, setInput] = useState("")
     const navigate = useNavigate()
     const handleClick = () => {
         navigate('/')
     }
 
     const [playersList, setPlayersList] = useState(
-        JSON.parse(localStorage.getItem("playersList")!) || [])
+        JSON.parse(localStorage.getItem("playersList")!) || []
+      );
 
     useEffect(() => {
         localStorage.setItem("playersList", JSON.stringify(playersList)); 
     }, [playersList])
 
-    const [input, setInput] = useState("")
 
     const handleAddPlayer = (event: { preventDefault: () => void }) => {
         event.preventDefault()
@@ -51,10 +52,6 @@ const Game = () => {
         
       }
    
-    // const deleteGame = () => {
-
-    // }
-
     const {
         register,
         watch,
@@ -66,26 +63,33 @@ const Game = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = (data) => {
         const gameData = {
-            id: uuidv4(),
-            day: data.date,
-            hour: data.hour,
-            value: data.value,
-            players: playersList.length,
-            duration: data.duration,
-            status: data.status,
+          id: uuidv4(),
+          day: data.date,
+          hour: data.hour,
+          value: data.value,
+          players: jogadores,
+          duration: data.duration,
+          status: data.status,
+          location: data.location
         };
-    
-        localStorage.setItem("gamesList", JSON.stringify([...(JSON.parse(localStorage.getItem("gamesList")!) || []), gameData]));
-        navigate("/"); // Redirecionar para a tela Home
-    };
+      
+        const gamesList = JSON.parse(localStorage.getItem("gamesList")!) || [];
+      
+        const updatedGamesList = [...gamesList, gameData];
+      
+        // Atualiza o localStorage com a nova lista de jogos
+        localStorage.setItem("gamesList", JSON.stringify(updatedGamesList));
+      
+        navigate("/"); // Navega de volta para a Home.tsx
+      };
 
     const valor = watch ("value")
     const soma = valor / playersList.length
+    const jogadores = playersList.length
+
 
 
   return (
-    
-
     <div>
         <TopMenu text="Criar racha" addGame={handleClick}/>
         <h1> <Link className={style.pageTitle} to="/"> <ArrowLeft size={24}/> Racha</Link></h1>
@@ -169,6 +173,7 @@ const Game = () => {
                             placeholder="Digite um nome" 
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
+                            required
                             />
                         <button type="submit" className={style.addButton}>Adicionar</button>
                     </form>
@@ -199,7 +204,6 @@ const Game = () => {
             </table>
         </section>
     </div>
-  )
-}
+)}
 
 export default Game
